@@ -1,0 +1,45 @@
+
+<div class="container">
+    <h1 class="text-center">Bine ai venit!</h1>
+    <div class="waiting-list">
+      <h3>Lista de asteptare: </h3>
+      <p *ngIf="users && !users.length">
+        Nu exista useri in asteptare!
+      </p>
+      <table class="table" *ngIf="users && users.length">
+        <thead scope="row">
+          <th>Numar de ordine</th>
+          <th>Nume</th>
+          <th>Prenume</th>
+          <th>Gen</th>
+          <th>Data nasterii</th>
+          <th>Actiuni</th>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let user of users; let i = index">
+            <tr scope="row" *ngIf="!user.isWaiting">
+              <td>{{ user.orderNumber }}</td>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.gender }}</td>
+              <td>{{ user.birthDay | date: 'fullDate'}}</td>
+              <td>
+                <button class="btn btn-secondary" [routerLink]="['edit', user.identity]" >Editeaza</button>
+                <button class="btn btn-danger" (click)="delete(user)">Sterge</button>
+              </td>
+         
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+  
+    <button type="button" class="btn btn-light" [routerLink]="['add']">Adauga</button>
+    <!-- <button type="button" class="btn btn-light" (click)="seeUser()">Vezi userii in consultatie</button> -->
+  </div>
+
+  <router-outlet></router-outlet>
+
+
+  <app-delete-user #deleteUserComponent [user]="user"></app-delete-user> 
