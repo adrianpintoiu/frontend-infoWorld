@@ -1,0 +1,10 @@
+
+  <app-modal #userDeleteModal>
+    <ng-container ngProjectAs="contentModal">
+        Esti sigur ca vrei sa stergi userul {{ user.firstName+ ' ' + user.lastName }}
+    </ng-container>
+
+    <ng-container ngProjectAs="footerModal">
+        <button class="btn btn-primary" (click)="delete(user.identity)">Save</button>
+    </ng-container>
+  </app-modal>

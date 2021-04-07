@@ -1,0 +1,101 @@
+<form [formGroup]="userForm">
+    <div class="form-group">
+      <label for="orderNumber">Order number</label>
+      <input class="form-control" disabled [attr.value]="user.orderNumber" type="text">
+    </div>
+    <div class="form-group">
+      <label for="firstName">Prenume</label>
+      <input class="form-control" formControlName="firstName">
+      <div class="all-pattern-error"
+        *ngIf="!userForm.controls.firstName.valid && userForm.controls.firstName.dirty">
+        <div class="input-error">
+          <small *ngIf="userForm.controls['firstName'].hasError('required')" class="text-danger">
+            Prenumele este obligatoriu
+          </small>
+          <small *ngIf="userForm.controls['firstName'].hasError('pattern')" class="text-danger">
+            Prenumele nu poate contine cifre
+          </small>
+          <small *ngIf="userForm.controls['firstName'].hasError('minlength')" class="text-danger">
+            Prenumele nu poate fi mai mic de 3 caractere
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Nume:</label>
+      <input class="form-control" type="text" formControlName="lastName">
+      <div class="all-pattern-error"
+        *ngIf="!userForm.controls.lastName.valid && userForm.controls.lastName.dirty">
+        <div class="input-error">
+          <small *ngIf="userForm.controls['lastName'].hasError('required')" class="text-danger">
+            Numele este obligatoriu
+          </small>
+          <small *ngIf="userForm.controls['lastName'].hasError('pattern')" class="text-danger">
+            Numele nu poate contine cifre
+          </small>
+          <small *ngIf="userForm.controls['lastName'].hasError('minlength')" class="text-danger">
+            Numele nu poate fi mai mic de 3 caractere
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Data de nastere:</label>
+      <input class="form-control" type="date" formControlName="birthDay">
+      <div class=" all-pattern-error"
+        *ngIf="!userForm.controls.birthDay.valid && userForm.controls.birthDay.dirty">
+        <div class="input-error">
+          <small *ngIf="userForm.controls['birthDay'].hasError('required')" class="text-danger">
+            Spune-ne cand este ziua ta
+          </small>
+          <small *ngIf="userForm.controls['birthDay'].hasError('invalidDate')" class="text-danger">
+            Data trebuie sa fie mai mica ca ziua de astazi!
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      Gen:
+        <label *ngFor="let gender of genders" for="gender"> {{gender.value}}
+        <input type="radio" name="gender" formControlName="gender" value="{{gender.key}}">
+      </label>
+      <div class="all-pattern-error" *ngIf="!userForm.controls.gender.valid  && userForm.controls.gender.dirty ">
+        <div class="input-error">
+          <small *ngIf="userForm.controls['gender'].hasError('required')" class="text-danger">
+            Sexul este obligatoriu
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>CNP:</label>
+      <input type="text" class="form-control" name="cnp" formControlName="cnp">
+      <div class="all-pattern-error" *ngIf="!userForm.controls.cnp.valid  && userForm.controls.cnp.dirty">
+        <div class="input-error">
+          <small *ngIf="userForm.controls['cnp'].hasError('pattern')" class="text-danger">
+            CNP-ul trebuie sa contina doar cifre
+          </small>
+          <small *ngIf="userForm.controls['cnp'].hasError('minlength') || userForm.controls['cnp'].hasError('maxlength')" class="text-danger">
+            CNP-ul trebuie sa contina doar 13 cifre
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label> Numar telefon: </label>
+      <input type="text" class="form-control" name="phoneNumber" formControlName="phoneNumber">
+      <div class="all-pattern-error" *ngIf="!userForm.controls.phoneNumber.valid  && userForm.controls.phoneNumber.dirty">
+        <div class="input-error">
+          <small *ngIf="userForm.controls['phoneNumber'].hasError('pattern')" class="text-danger">
+           Numarul de telefon trebuie sa contina doar cifre
+          </small>
+
+        </div>
+      </div>
+    </div>
+ 
+  </form>
